@@ -1,6 +1,6 @@
 from pydantic import BaseModel
 from datetime import datetime
-from typing import List
+from typing import List , Optional
 
 
 
@@ -17,3 +17,14 @@ class UserDisplay(BaseModel):
     class Config:
         from_attributes = True
 
+
+
+
+class BookDisplay(BaseModel):
+    title: str
+    publisher: Optional[str]
+    price: Optional[int]
+    published: Optional[int]
+
+    class Config:
+        from_attributes = True
