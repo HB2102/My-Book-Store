@@ -11,7 +11,6 @@ class User(Base):
     password = Column(String)
     first_name = Column(String)
     last_name = Column(String)
-    phone_number = Column(String(20))
     email = Column(String)
     is_admin = Column(Boolean)
     current_cart_id = Column(Integer, ForeignKey('cart.id'))
@@ -32,7 +31,6 @@ class Book(Base):
     # cart_item_book = relationship('CartItem', back_populates='book_cart_item')
 
 
-
 # BOOK PICTURE TABLE ============================================================================================
 class BookPicture(Base):
     __tablename__ = 'book_picture'
@@ -48,7 +46,6 @@ class Author(Base):
     id = Column(Integer, index=True, primary_key=True)
     name = Column(String)
     # book_author_author = relationship('BookAuthor', back_populates='author_book_author')
-
 
 
 # BOOK AUTHOR TABLE ============================================================================================
@@ -81,8 +78,10 @@ class CartItem(Base):
     cart_id = Column(Integer, ForeignKey('cart.id'))
     book_id = Column(Integer, ForeignKey('book.id'))
     quantity = Column(Integer)
+    total_price_of_item = Column(Integer)
     # cart_cart_item = relationship('Cart', back_populates='cart_item_cart')
     # book_cart_item = relationship('Book', back_populates='cart_item_book')
+
 
 # PAYMENT TABLE ============================================================================================
 class Payment(Base):
@@ -94,3 +93,23 @@ class Payment(Base):
     # cart_payment = relationship('Cart', back_populates='payment_cart')
 
 
+# Order TABLE ============================================================================================
+class Oreder(Base):
+    __tablename__ = 'order'
+    id = Column(Integer, index=True, primary_key=True)
+    cart_id = Column(Integer, ForeignKey('cart.id'))
+    user_id = Column(Integer, ForeignKey('user.id'))
+    payment_id = Column(Integer, ForeignKey('payment.id'))
+    address = Column(String)
+    postal_code = Column(String)
+    phone_number = Column(String(15))
+    is_sent = Column(Boolean)
+
+
+# COMMENT TABLE ============================================================================================
+class Comment(Base):
+    __tablename__ = 'comment'
+    id = Column(Integer, index=True, primary_key=True)
+    user_id = Column(Integer, ForeignKey('user.id'))
+    book_id = Column(Integer, ForeignKey('book.id'))
+    text = Column(String)
