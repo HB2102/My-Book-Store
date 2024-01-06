@@ -103,7 +103,7 @@ def admin_delete_user_by_username(username: str, db: Session, admin_id: int):
         db.commit()
         return 'User Deleted'
     except:
-        raise  HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR)
+        raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 
 

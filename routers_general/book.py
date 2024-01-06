@@ -16,6 +16,10 @@ def get_book(id: int, db: Session = Depends(get_db)):
     return db_book.get_book(id, db)
 
 
+@router.get('/get_all_books', response_model=List[BookDisplay])
+def get_all_books(db: Session = Depends(get_db)):
+    return db_book.get_all_books(db)
+
 @router.get('/get_books_by_title/{title}', response_model=List[BookDisplay])
 def get_book_by_title(title: str, db: Session = Depends(get_db)):
     return db_book.get_book_by_title(title, db)

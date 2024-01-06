@@ -1,8 +1,7 @@
 from pydantic import BaseModel
 from fastapi import Query
 from datetime import datetime
-from typing import List , Optional
-
+from typing import List, Optional
 
 
 class UserBase(BaseModel):
@@ -31,7 +30,13 @@ class AdminUserDisplay(BaseModel):
         from_attributes = True
 
 
+class UserAuth(BaseModel):
+    id: int
+    username: str
+    email: str
 
+    class Config:
+        from_attributes = True
 
 
 class BookDisplay(BaseModel):
@@ -44,11 +49,23 @@ class BookDisplay(BaseModel):
         from_attributes = True
 
 
+class BookBase(BaseModel):
+    title: str
+    publisher: Optional[str]
+    price: int
+    published: Optional[int]
+    quantity: Optional[int]
 
-class UserAuth(BaseModel):
+    # pictures: Optional[List[]]
+
+
+class AdminBookDisplay(BaseModel):
     id: int
-    username: str
-    email: str
+    title: str
+    publisher: Optional[str]
+    price: Optional[int]
+    published: Optional[int]
+    quantity: Optional[int]
 
     class Config:
-        orm_mode = True
+        from_attributes = True
