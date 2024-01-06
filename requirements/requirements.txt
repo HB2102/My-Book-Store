@@ -9,6 +9,7 @@ h11==0.14.0
 idna==3.6
 passlib==1.7.4
 pyasn1==0.5.1
+pydantic==2.5.3
 pydantic_core==2.14.6
 python-jose==3.3.0
 rsa==4.9
