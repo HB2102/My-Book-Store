@@ -55,6 +55,7 @@ class BookBase(BaseModel):
     price: int
     published: Optional[int]
     quantity: Optional[int]
+    category_id: Optional[int]
 
     # pictures: Optional[List[]]
 
@@ -85,6 +86,13 @@ class CartDisplay(BaseModel):
     total_price: float
 
     # is_paid: bool
+
+    class Config:
+        from_attributes = True
+
+
+class CategoryDisplay(BookDisplay):
+    name: str
 
     class Config:
         from_attributes = True

@@ -73,3 +73,8 @@ def update_all_prices(percent: int, db: Session = Depends(get_db),
 def update_book_quantity(id: int, new_quantity: int, db: Session = Depends(get_db),
                          admin: UserAuth = Depends(auth.get_current_user_admin)):
     return db_book.admin_update_quantity(id, new_quantity, db, admin.id)
+
+
+@router.delete('/delete_book/{id}')
+def delete_book(id: int, db: Session = Depends(get_db), admin: UserAuth = Depends(auth.get_current_user_admin)):
+    return db_book.admin_delete_book(id, db, admin.id)

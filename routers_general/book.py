@@ -5,9 +5,6 @@ from database.database import get_db
 from database_functions import db_book
 from typing import List
 
-
-
-
 router = APIRouter(prefix='/book', tags=['book'])
 
 
@@ -19,6 +16,7 @@ def get_book(id: int, db: Session = Depends(get_db)):
 @router.get('/get_all_books', response_model=List[BookDisplay])
 def get_all_books(db: Session = Depends(get_db)):
     return db_book.get_all_books(db)
+
 
 @router.get('/get_books_by_title/{title}', response_model=List[BookDisplay])
 def get_book_by_title(title: str, db: Session = Depends(get_db)):
@@ -35,3 +33,6 @@ def get_books_by_publisher(publisher: str, db: Session = Depends(get_db)):
     return db_book.get_book_by_publisher(publisher, db)
 
 
+@router.get('/get_books_by_category/{category}', response_model=List[BookDisplay])
+def get_books_by_category(category: str, db: Session = Depends(get_db)):
+    return db_book.get_book_by_category(category, db)

@@ -26,9 +26,17 @@ class Book(Base):
     price = Column(Integer)
     published = Column(Integer)
     quantity = Column(Integer)
+    category_id = Column(Integer, ForeignKey('category.id'))
     # book_picture_book = relationship('BookPicture', back_populates='book_book_picture')
     # book_author_book = relationship('BookAuthor', back_populates='book_book_author')
     # cart_item_book = relationship('CartItem', back_populates='book_cart_item')
+
+
+# BOOK TABLE ============================================================================================
+class Category(Base):
+    __tablename__ = 'category'
+    id = Column(Integer, index=True, primary_key=True)
+    name = Column(String)
 
 
 # BOOK PICTURE TABLE ============================================================================================

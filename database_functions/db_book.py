@@ -1,4 +1,4 @@
-from database.models import Book, Author, BookAuthor, BookPicture, User
+from database.models import Book, Author, BookAuthor, BookPicture, User, Category
 from schemas.schemas import BookDisplay, BookBase
 from sqlalchemy import Select
 from sqlalchemy.orm import Session
@@ -56,6 +56,21 @@ def get_book_by_publisher(publisher: str, db: Session):
     return books
 
 
+def get_book_by_category(category_name: str, db: Session):
+    category = db.query(Category).filter(Category.name == category_name).first()
+    if not category:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
+                            detail='No such a category was found !')
+
+    books = db.query(Book).filter(Book.category_id == category.id).all()
+
+    if not books:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
+                            detail='No book was found in this category!')
+
+    return books
+
+
 # =======================================================================================================
 # =======================================================================================================
 # =======================================================================================================
@@ -79,6 +94,7 @@ def add_book(request: BookBase, db: Session, admin_id: int):
             price=request.price,
             published=request.published,
             quantity=request.quantity,
+            category_id=request.category_id,
         )
         db.add(book)
         db.commit()
@@ -268,6 +284,26 @@ def admin_update_quantity(id: int, new_quantity: int, db: Session, admin_id: int
         db.commit()
 
         return book
+
+    except:
+        raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+
+def admin_delete_book(id: int, db: Session, admin_id: int):
+    admin = db.query(User).filter(User.id == admin_id).first()
+
+    if admin.is_admin == False:
+        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED)
+
+    try:
+        book = db.query(Book).filter(Book.id == id).first()
+        if not book:
+            return "No such a book"
+
+        db.delete(book)
+        db.commit()
+
+        return 'Book deleted'
 
     except:
         raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR)
