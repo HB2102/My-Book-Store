@@ -62,7 +62,6 @@ class BookAuthor(Base):
 class Cart(Base):
     __tablename__ = 'cart'
     id = Column(Integer, index=True, primary_key=True)
-    number_of_items = Column(Integer)
     user_id = Column(Integer, ForeignKey('user.id'))
     total_price = Column(Float)
     payment_id = Column(Integer, ForeignKey('payment.id'))

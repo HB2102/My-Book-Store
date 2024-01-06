@@ -69,3 +69,22 @@ class AdminBookDisplay(BaseModel):
 
     class Config:
         from_attributes = True
+
+
+class CartItemDisplay(BaseModel):
+    title: str
+    price: float
+    quantity: int
+
+    class Config:
+        from_attributes = True
+
+
+class CartDisplay(BaseModel):
+    user_id: UserDisplay
+    total_price: float
+
+    # is_paid: bool
+
+    class Config:
+        from_attributes = True
