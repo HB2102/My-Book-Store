@@ -95,6 +95,7 @@ def add_book(request: BookBase, db: Session, admin_id: int):
             published=request.published,
             quantity=request.quantity,
             category_id=request.category_id,
+            number_of_comments=0,
         )
         db.add(book)
         db.commit()

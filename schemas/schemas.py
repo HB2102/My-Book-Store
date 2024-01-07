@@ -44,6 +44,8 @@ class BookDisplay(BaseModel):
     publisher: Optional[str]
     price: Optional[int]
     published: Optional[int]
+    number_of_comments: Optional[int]
+    average_rating: Optional[float]
 
     class Config:
         from_attributes = True
@@ -93,6 +95,31 @@ class CartDisplay(BaseModel):
 
 class CategoryDisplay(BookDisplay):
     name: str
+
+    class Config:
+        from_attributes = True
+
+
+class CommentBase(BaseModel):
+    book_id: int
+    text: str
+    rating: Optional[int]
+
+
+class CommentDisplay(BaseModel):
+    text: str
+    rating: int
+
+    class Config:
+        from_attributes = True
+
+
+class AminCommentDisplay(BaseModel):
+    id: int
+    user_id: int
+    book_id: int
+    text: str
+    rating: int
 
     class Config:
         from_attributes = True

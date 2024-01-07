@@ -27,6 +27,8 @@ class Book(Base):
     published = Column(Integer)
     quantity = Column(Integer)
     category_id = Column(Integer, ForeignKey('category.id'))
+    number_of_comments = Column(Integer)
+    average_rating = Column(Float)
     # book_picture_book = relationship('BookPicture', back_populates='book_book_picture')
     # book_author_book = relationship('BookAuthor', back_populates='book_book_author')
     # cart_item_book = relationship('CartItem', back_populates='book_cart_item')
@@ -120,3 +122,4 @@ class Comment(Base):
     user_id = Column(Integer, ForeignKey('user.id'))
     book_id = Column(Integer, ForeignKey('book.id'))
     text = Column(String)
+    rating = Column(Integer)
