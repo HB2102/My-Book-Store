@@ -177,7 +177,6 @@ def admin_delete_all_comments_of_user(user_id: int, db: Session, admin_id: int):
     if admin.is_admin == False:
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED)
 
-    # try:
     user = db.query(User).filter(User.id == user_id).first()
     if not user:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
@@ -194,16 +193,12 @@ def admin_delete_all_comments_of_user(user_id: int, db: Session, admin_id: int):
 
     return 'All the comments of this user has benn deleted'
 
-    # except:
-    #     raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR)
-
 
 def admin_delete_all_comments_of_book(book_id: int, db: Session, admin_id: int):
     admin = db.query(User).filter(User.id == admin_id).first()
     if admin.is_admin == False:
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED)
 
-    # try:
     book = db.query(Book).filter(Book.id == book_id).first()
     if not book:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
@@ -219,6 +214,3 @@ def admin_delete_all_comments_of_book(book_id: int, db: Session, admin_id: int):
         admin_delete_comment(comment.id, db, admin_id)
 
     return 'All the comments of this book has been deleted.'
-
-    # except:
-    #     raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR)

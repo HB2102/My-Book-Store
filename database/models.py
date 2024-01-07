@@ -12,6 +12,7 @@ class User(Base):
     first_name = Column(String)
     last_name = Column(String)
     email = Column(String)
+    phone_number = Column(String(20))
     is_admin = Column(Boolean)
     current_cart_id = Column(Integer, ForeignKey('cart.id'))
     # cart_user = relationship('Cart', back_populates='user_cart')

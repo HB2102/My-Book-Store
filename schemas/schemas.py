@@ -10,6 +10,15 @@ class UserBase(BaseModel):
     password: str
 
 
+class UpdateUserBase(BaseModel):
+    username: Optional[str]
+    password: Optional[str]
+    first_name: Optional[str]
+    last_name: Optional[str]
+    email: Optional[str]
+    phone_number: Optional[str]
+
+
 class UserDisplay(BaseModel):
     username: str
     email: str
@@ -25,6 +34,7 @@ class AdminUserDisplay(BaseModel):
     last_name: Optional[str]
     phone_number: Optional[str]
     email: str
+    phone_number: Optional[str]
 
     class Config:
         from_attributes = True
