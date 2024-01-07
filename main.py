@@ -2,7 +2,7 @@ from fastapi import FastAPI
 from database.database import Base
 from database.database import engine
 from database import models
-from routers_general import user, book, cart, comment
+from routers_general import user, book, cart, comment, payment
 from routers_admin import admin_user, admin_book, admin_cart, admin_category, admin_author, admin_commet
 from authentication import authentication
 
@@ -11,6 +11,7 @@ app.include_router(user.router)
 app.include_router(book.router)
 app.include_router(cart.router)
 app.include_router(comment.router)
+app.include_router(payment.router)
 app.include_router(authentication.router)
 app.include_router(admin_user.router)
 app.include_router(admin_book.router)

@@ -112,7 +112,9 @@ class Oreder(Base):
     payment_id = Column(Integer, ForeignKey('payment.id'))
     address = Column(String)
     postal_code = Column(String)
+    price = Column(Float)
     phone_number = Column(String(15))
+    paid_at = Column(DateTime)
     is_sent = Column(Boolean)
 
 

@@ -133,3 +133,9 @@ class AminCommentDisplay(BaseModel):
 
     class Config:
         from_attributes = True
+
+
+class SetOrder(BaseModel):
+    address: str
+    postal_code: str
+    phone_number: str
