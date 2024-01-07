@@ -335,3 +335,115 @@ def admin_get_carts_of_user_by_username(username: str, db: Session, admin_id: in
     }
 
     return display
+
+
+def get_cart(cart_id: int, db: Session):
+    cart = db.query(Cart).filter(Cart.id == cart_id).first()
+    user = db.query(User).filter(User.id == cart.user_id).first()
+    payment = db.query(Payment).filter(Payment.id == cart.payment_id).first()
+    is_paid = payment.is_paid
+
+    user_display = {
+        'username': user.username,
+        'email': user.email
+    }
+
+    items = db.query(CartItem).join(Book).filter(CartItem.cart_id == cart.id).all()
+    items2 = []
+    for item in items:
+        book = db.query(Book).filter(Book.id == item.book_id).first()
+        item_display = {
+            'name': book.title,
+            'quantity': item.quantity,
+            'item_price': item.total_price_of_item,
+        }
+        items2.append(item_display)
+
+    display = {
+        'user': user_display,
+        'total_price': cart.total_price,
+        'is_paid': is_paid,
+        'items': items2,
+    }
+
+    return display
+
+
+def admin_get_cart(cart_id: int, db: Session):
+    cart = db.query(Cart).filter(Cart.id == cart_id).first()
+    user = db.query(User).filter(User.id == cart.user_id).first()
+    payment = db.query(Payment).filter(Payment.id == cart.payment_id).first()
+    is_paid = payment.is_paid
+
+    user_display = {
+        'user_id': user.id,
+        'username': user.username,
+        'email': user.email,
+        'phone_number': user.phone_number,
+        'first_name': user.first_name,
+        'last_name': user.last_name,
+    }
+
+    items = db.query(CartItem).join(Book).filter(CartItem.cart_id == cart.id).all()
+    items2 = []
+    for item in items:
+        book = db.query(Book).filter(Book.id == item.book_id).first()
+        item_display = {
+            'id': book.id,
+            'name': book.title,
+            'quantity': item.quantity,
+            'item_price': item.total_price_of_item,
+            'publisher': book.publisher,
+        }
+        items2.append(item_display)
+
+    display = {
+        'user': user_display,
+        'total_price': cart.total_price,
+        'is_paid': is_paid,
+        'items': items2,
+    }
+
+    return display
+
+
+def admin_get_cart_by_id(cart_id: int, db: Session, admin_id: int):
+    admin = db.query(User).filter(User.id == admin_id).first()
+    if admin.is_admin == False:
+        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED)
+
+    display = admin_get_cart(cart_id, db)
+
+    return display
+
+
+def admin_delete_cart(cart_id: int, db: Session, admin_id: int):
+    admin = db.query(User).filter(User.id == admin_id).first()
+    if admin.is_admin == False:
+        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED)
+
+    cart = db.query(Cart).filter(Cart.id == cart_id).first()
+    if not cart:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
+                            detail='Cart not found !')
+
+    payment = db.query(Payment).filter(Payment.cart_id == cart.id).first()
+    if payment.is_paid == True:
+        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED,
+                            detail='You are not authorized to delete paid carts !')
+
+    user = db.query(User).filter(User.current_cart_id == cart.id)
+    items = db.query(CartItem).filter(CartItem.cart_id == cart.id).all()
+    for item in items:
+        book = db.query(Book).filter(Book.id == item.book_id).first()
+        book.quantity = book.quantity + item.quantity
+        db.delete(item)
+        db.commit()
+
+    user.current_cart_id = 0
+
+    db.delete(payment)
+    db.delete(cart)
+    db.commit()
+
+    return "Cart deleted."

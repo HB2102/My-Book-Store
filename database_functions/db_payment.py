@@ -39,5 +39,4 @@ def pay_for_cart(request: SetOrder, db: Session, user_id: int):
     user.current_cart_id = 0
     db.commit()
 
-    # return "your order has been set. It will be sent to you soon"
     return display_of_cart
