@@ -1,7 +1,6 @@
 from pydantic import BaseModel
 from fastapi import Query
-from datetime import datetime
-from typing import List, Optional
+from typing import Optional
 
 
 class UserBase(BaseModel):

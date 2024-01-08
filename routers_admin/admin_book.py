@@ -1,5 +1,5 @@
 from fastapi import APIRouter, Depends
-from schemas.schemas import AdminUserDisplay, UserBase, UserAuth, AdminBookDisplay, BookBase
+from schemas.schemas import UserAuth, AdminBookDisplay, BookBase
 from sqlalchemy.orm import Session
 from database.database import get_db
 from database_functions import db_book
@@ -7,7 +7,7 @@ from authentication import auth
 from typing import List
 
 router = APIRouter(
-    tags=['Admin products'],
+    tags=['Admin Products'],
     prefix='/admin/products',
 )
 

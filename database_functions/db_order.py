@@ -1,12 +1,8 @@
-from database.models import Cart, CartItem, Payment, Book, User, Oreder
-from schemas.schemas import UserBase, BookDisplay
+from database.models import Cart, User, Oreder
 from sqlalchemy.orm import Session
-from sqlalchemy.sql.expression import and_
-from database.hash import Hash
 from fastapi.exceptions import HTTPException
 from fastapi import status
-from database_functions.db_cart import get_cart, admin_get_cart
-import datetime
+from database_functions.db_cart import get_cart
 
 
 def get_order(order_id, db: Session):

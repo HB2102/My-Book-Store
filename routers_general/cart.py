@@ -1,11 +1,11 @@
 from fastapi import APIRouter, Depends
-from schemas.schemas import UserDisplay, UserBase, UserAuth, CartDisplay, CartItemDisplay
+from schemas.schemas import UserAuth
 from sqlalchemy.orm import Session
 from database.database import get_db
 from database_functions import db_cart
 from authentication import auth
 
-router = APIRouter(prefix='/cart', tags=['cart'])
+router = APIRouter(prefix='/cart', tags=['Cart'])
 
 
 @router.get('/add_to_cart/{book_id}/{number}')

@@ -1,10 +1,7 @@
 from database.models import User, Payment, Oreder, Cart
-from schemas.schemas import UserBase, UpdateUserBase, SetOrder
+from schemas.schemas import SetOrder
 from sqlalchemy.orm import Session
-from database.hash import Hash
 from database_functions.db_cart import get_current_cart
-from fastapi.exceptions import HTTPException
-from fastapi import status
 import datetime
 
 

@@ -5,7 +5,7 @@ from database.database import get_db
 from database_functions import db_book
 from typing import List
 
-router = APIRouter(prefix='/book', tags=['book'])
+router = APIRouter(prefix='/book', tags=['Book'])
 
 
 @router.get('/get_book/{id}', response_model=BookDisplay)

@@ -1,11 +1,11 @@
 from fastapi import APIRouter, Depends
-from schemas.schemas import UserDisplay, UserBase, UserAuth, UpdateUserBase, SetOrder
+from schemas.schemas import UserAuth, SetOrder
 from sqlalchemy.orm import Session
 from database.database import get_db
 from database_functions import db_payment
 from authentication import auth
 
-router = APIRouter(prefix='/payment', tags=['payment'])
+router = APIRouter(prefix='/payment', tags=['Payment'])
 
 
 @router.post('/pay_for_cart')

@@ -1,10 +1,9 @@
 from fastapi import APIRouter, Depends
-from schemas.schemas import AdminUserDisplay, UserBase, UserAuth
+from schemas.schemas import UserAuth
 from sqlalchemy.orm import Session
 from database.database import get_db
 from database_functions import db_cart
 from authentication import auth
-from typing import List
 
 router = APIRouter(
     tags=['Admin Carts'],

@@ -1,5 +1,5 @@
 from fastapi import APIRouter, Depends
-from schemas.schemas import AdminUserDisplay, UserBase, UserAuth, AminCommentDisplay
+from schemas.schemas import UserAuth, AminCommentDisplay
 from sqlalchemy.orm import Session
 from database.database import get_db
 from database_functions import db_comment
@@ -7,7 +7,7 @@ from authentication import auth
 from typing import List
 
 router = APIRouter(
-    tags=['Admin comments'],
+    tags=['Admin Comments'],
     prefix='/admin/comments',
 )
 

@@ -1,15 +1,11 @@
 from fastapi import APIRouter, Depends, status, UploadFile, File
 from fastapi.responses import FileResponse
 from fastapi.exceptions import HTTPException
-from schemas.schemas import BookDisplay, CommentBase, CommentDisplay, UserAuth
 from sqlalchemy.orm import Session
 from database.database import get_db
-from database_functions import db_comment
-from database.models import BookPicture, User, Book
-from typing import List
-from authentication import auth
+from database.models import BookPicture, Book
 
-router = APIRouter(prefix='/picture', tags=['picture'])
+router = APIRouter(prefix='/picture', tags=['Picture'])
 
 
 @router.get('/get_pictures_of_book/{book_id}', response_class=FileResponse)

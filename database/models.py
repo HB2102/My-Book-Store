@@ -1,6 +1,5 @@
-from database.database import Base, sessionlocal
+from database.database import Base
 from sqlalchemy import Column, Integer, String, DateTime, ForeignKey, Boolean, Float
-from sqlalchemy.orm import relationship
 
 
 # USER TABLE ============================================================================================

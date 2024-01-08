@@ -1,13 +1,12 @@
 from fastapi import APIRouter, Depends
-from schemas.schemas import AdminUserDisplay, UserBase, UserAuth, AdminBookDisplay, BookBase
+from schemas.schemas import UserAuth
 from sqlalchemy.orm import Session
 from database.database import get_db
 from database_functions import db_author
 from authentication import auth
-from typing import List
 
 router = APIRouter(
-    tags=['Admin author'],
+    tags=['Admin Author'],
     prefix='/admin/author',
 )
 

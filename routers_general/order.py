@@ -1,11 +1,11 @@
 from fastapi import APIRouter, Depends
-from schemas.schemas import UserDisplay, UserBase, UserAuth, CartDisplay, CartItemDisplay
+from schemas.schemas import UserAuth
 from sqlalchemy.orm import Session
 from database.database import get_db
 from database_functions import db_order
 from authentication import auth
 
-router = APIRouter(prefix='/order', tags=['order'])
+router = APIRouter(prefix='/order', tags=['Order'])
 
 
 @router.get('/get_all_self_orders')

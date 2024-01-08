@@ -5,7 +5,7 @@ from database.database import get_db
 from database_functions import db_user
 from authentication import auth
 
-router = APIRouter(prefix='/user', tags=['user'])
+router = APIRouter(prefix='/user', tags=['User'])
 
 
 @router.post('/create', response_model=UserDisplay)

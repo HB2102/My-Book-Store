@@ -1,11 +1,8 @@
-from database.models import Cart, CartItem, Payment, Book, User, Comment
-from schemas.schemas import UserBase, BookDisplay, CommentBase, CommentDisplay
+from database.models import Book, User, Comment
+from schemas.schemas import CommentBase
 from sqlalchemy.orm import Session
-from sqlalchemy.sql.expression import and_
-from database.hash import Hash
 from fastapi.exceptions import HTTPException
 from fastapi import status
-import datetime
 
 
 def add_comment(request: CommentBase, db: Session, user_id: int):
@@ -31,7 +28,6 @@ def add_comment(request: CommentBase, db: Session, user_id: int):
         db.commit()
 
         return comment
-
 
     except:
         raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR)

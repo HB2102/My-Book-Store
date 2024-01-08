@@ -1,6 +1,4 @@
-from database.models import Book, Author, BookAuthor, BookPicture, User, Category
-from schemas.schemas import BookDisplay, BookBase
-from sqlalchemy import Select
+from database.models import User, Category
 from sqlalchemy.orm import Session
 from fastapi.exceptions import HTTPException
 from fastapi import status

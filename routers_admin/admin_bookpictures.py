@@ -1,18 +1,16 @@
 from fastapi import APIRouter, Depends, status, UploadFile, File
 from fastapi.exceptions import HTTPException
-from schemas.schemas import AdminUserDisplay, UserBase, UserAuth
+from schemas.schemas import UserAuth
 from sqlalchemy.orm import Session
 from database.database import get_db
 from database.models import BookPicture, User
-from database_functions import db_order
 from authentication import auth
-from typing import List
 from string import ascii_letters
 import random
 import shutil
 
 router = APIRouter(
-    tags=['Admin files'],
+    tags=['Admin Files'],
     prefix='/admin/file',
 )
 

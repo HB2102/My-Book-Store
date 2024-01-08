@@ -1,12 +1,12 @@
 from fastapi import APIRouter, Depends
-from schemas.schemas import BookDisplay, CommentBase, CommentDisplay, UserAuth
+from schemas.schemas import CommentBase, CommentDisplay, UserAuth
 from sqlalchemy.orm import Session
 from database.database import get_db
 from database_functions import db_comment
 from typing import List
 from authentication import auth
 
-router = APIRouter(prefix='/comment', tags=['comment'])
+router = APIRouter(prefix='/comment', tags=['Comment'])
 
 
 @router.post('/add_comment', response_model=CommentDisplay)
