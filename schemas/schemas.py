@@ -5,7 +5,7 @@ from typing import Optional
 
 class UserBase(BaseModel):
     username: str
-    email: str = Query(regex=r"(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$)")
+    email: str = Query(pattern=r"(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$)")
     password: str
 
 

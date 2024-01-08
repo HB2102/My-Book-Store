@@ -6,6 +6,7 @@ from database.database import get_db
 from database.models import BookPicture, User
 from authentication import auth
 from string import ascii_letters
+# import os
 import random
 import shutil
 
@@ -58,6 +59,9 @@ def admin_delete_book_picture(book_id: int, db: Session = Depends(get_db),
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail='No picture found !')
 
     for picture in pictures:
+        # if os.path.exists(picture.picture):
+        #     os.rename(picture.picture)
+
         db.delete(picture)
         db.commit()
 
