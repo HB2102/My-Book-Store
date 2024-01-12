@@ -49,6 +49,7 @@ class UserAuth(BaseModel):
 
 
 class BookDisplay(BaseModel):
+    id: int
     title: str
     publisher: Optional[str]
     price: Optional[int]

@@ -6,7 +6,7 @@ from database.database import get_db
 from database.models import BookPicture, User
 from authentication import auth
 from string import ascii_letters
-# import os
+import os
 import random
 import shutil
 
@@ -25,10 +25,6 @@ def admin_upload_book_picture(book_id: int, file: UploadFile = File(...), db: Se
 
     rand_str = ''.join(random.choice(ascii_letters) for _ in range(6))
     new_name = f'_{rand_str}.'.join(file.filename.rsplit('.', 1))
-
-    pic = db.query(BookPicture).filter(BookPicture.book_id == book_id).first()
-    if pic:
-        raise HTTPException(status_code=status.HTTP_406_NOT_ACCEPTABLE, detail='This book already has a picture !')
 
     path_file = f'pictures/{new_name}'
 
@@ -59,8 +55,8 @@ def admin_delete_book_picture(book_id: int, db: Session = Depends(get_db),
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail='No picture found !')
 
     for picture in pictures:
-        # if os.path.exists(picture.picture):
-        #     os.rename(picture.picture)
+        if os.path.exists(picture.picture):
+            os.remove(picture.picture)
 
         db.delete(picture)
         db.commit()
