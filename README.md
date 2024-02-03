@@ -5,7 +5,7 @@
 Here is a FastApi project for backend of a simple book store.  
 This project uses sqlite and SQLAlchemy for the database and has token-base authentication for user and admin
 separately.
-To use it and test it fallow these instructions:
+To use it and test it follow these instructions:
 <br><br>
 
 ### 1. Download project
